@@ -23,3 +23,13 @@ npm install primeflex --save
 ```shell
 npm start
 ```
+
+## App Views
+
+Login View
+
+![Login view](captures/Login_View.png "Login view")
+
+Products View 
+
+![Products view](captures/Products_View.png "Products view")
