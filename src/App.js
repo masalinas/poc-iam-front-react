@@ -1,4 +1,5 @@
-import {useState} from 'react';
+import React, { Component, Suspense } from 'react'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
 import './App.css';
 
@@ -7,17 +8,29 @@ import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
 import 'primeflex/primeflex.css';
 
-import {Button} from 'primereact/button';
+const loading = (
+  <div>Loading...</div>
+)
 
-function App() {
-  const [count, setCount] = useState(0);
-    
-  return (
-      <div className="text-center">
-          <Button label="Click" icon="pi pi-plus" onClick={e => setCount(count + 1)}></Button>
-          <div className="text-2xl text-900 mt-3">{count}</div>
-      </div>
-  );
+// Landing views
+const Login = React.lazy(() => import('./views/landing/login/Login'))
+
+// App vviews
+const Products = React.lazy(() => import('./views/products/Products'))
+
+class App extends Component {
+  render() {
+    return (
+      <Router>
+        <Suspense fallback={loading}>
+          <Switch>
+            <Route exact path="/login" name="Login Page" render={(props) => <Login {...props} />} />          
+            <Route path="/" name="Products" render={(props) => <Products {...props} />} />
+          </Switch>
+        </Suspense>
+      </Router>
+    );
+  }
 }
 
 export default App;
