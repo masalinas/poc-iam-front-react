@@ -1,4 +1,4 @@
-import React, { lazy, useState } from 'react'
+import React, { useState } from 'react'
 import { useHistory } from "react-router-dom";
 
 import { Button } from 'primereact/button';
@@ -23,7 +23,7 @@ const Login = () => {
                     <img src={Logo} alt="hyper" height={50} className="mb-3" />
                     <div className="text-900 text-3xl font-medium mb-3">Welcome Back</div>
                     <span className="text-600 font-medium line-height-3">Don't have an account?</span>
-                    <a className="font-medium no-underline ml-2 text-blue-500 cursor-pointer">Create today!</a>
+                    <a className="font-medium no-underline ml-2 text-blue-500 cursor-pointer" href="#/">Create today!</a>
                 </div>
 
                 <div>
@@ -38,7 +38,7 @@ const Login = () => {
                             <Checkbox id="rememberme" onChange={e => setChecked(e.checked)} checked={checked} binary className="mr-2" />
                             <label htmlFor="rememberme">Remember me</label>
                         </div>
-                        <a className="font-medium no-underline ml-2 text-blue-500 text-right cursor-pointer">Forgot your password?</a>
+                        <a className="font-medium no-underline ml-2 text-blue-500 text-right cursor-pointer" href="#/">Forgot your password?</a>
                     </div>
 
                     <Button label="Sign In" icon="pi pi-user" className="w-full" onClick={loginClick}/>

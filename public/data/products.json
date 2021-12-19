@@ -1,0 +1,7 @@
+{
+    "data": [
+        {"code": "001", "description": "Banana", "price": 8.5, "active": true},
+        {"code": "001", "description": "Apple", "price": 7.2, "active": false},
+        {"code": "003", "description": "Orange", "price": 5.0, "active": true}        
+    ]
+}

@@ -1,18 +1,46 @@
-import React, { lazy, Component, useState } from 'react'
+import React, { Component } from 'react'
+import { classNames } from 'primereact/utils';
 
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-import { Button } from 'primereact/button';
 
-const Products = () => {
-    const [count, setCount] = useState(0);
-    
-    return (
-        <div className="text-center">
-            <Button label="Click" icon="pi pi-plus" onClick={e => setCount(count + 1)}></Button>
-            <div className="text-2xl text-900 mt-3">{count}</div>
-        </div>
-    )
+import { ProductService } from '../../services/ProductService';
+
+export class Products extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            products: []
+        };
+
+        this.verifiedBodyTemplate = this.verifiedBodyTemplate.bind(this);
+
+        this.productService = new ProductService();
+    }
+
+    componentDidMount() {
+        this.productService.getProducts().then(data => this.setState({ products: data }));
+    }
+
+    verifiedBodyTemplate(rowData) {
+        return <i className={classNames('pi', {'true-icon pi-check-circle': rowData.active, 'false-icon pi-times-circle': !rowData.active})}></i>;
+    }
+
+    render() {
+        return (
+            <div>
+                <div className="card">
+                    <DataTable value={this.state.products} responsiveLayout="scroll">
+                        <Column field="code" header="Code"></Column>
+                        <Column field="description" header="Description"></Column>
+                        <Column field="price" header="Price" dataType="numeric"></Column>
+                        <Column field="active" header="Active" dataType="boolean" body={this.verifiedBodyTemplate}></Column>
+                    </DataTable>
+                </div>
+            </div>
+        )
+    }
 }
 
 export default Products
