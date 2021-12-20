@@ -6,7 +6,7 @@ import { Column } from 'primereact/column';
 
 import { ProductService } from '../../services/ProductService';
 
-export class Products extends Component {
+class Products extends Component {
     constructor(props) {
         super(props);
 
@@ -20,7 +20,7 @@ export class Products extends Component {
     }
 
     componentDidMount() {
-        this.productService.getProducts().then(data => this.setState({ products: data }));
+        this.productService.getMockProducts().then(data => this.setState({ products: data }));
     }
 
     verifiedBodyTemplate(rowData) {
@@ -43,4 +43,4 @@ export class Products extends Component {
     }
 }
 
-export default Products
+export default Products;

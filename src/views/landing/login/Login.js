@@ -7,13 +7,36 @@ import { InputText } from 'primereact/inputtext';
 
 import Logo from '../../../assets/images/hyper.svg'
 
+import AuthService from "../../../services/AuthService";
+
 const Login = () => {
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
     const [checked, setChecked] = useState(false);
 
     const history = useHistory();
 
     function loginClick() {
-        history.push("/");
+        AuthService.login(username, password).then(
+            response => {
+                // navigate to main view
+                history.push("/");
+            },
+            error => {
+              //this.setState({
+              //  content:
+              //    (error.response &&
+              //      error.response.data &&
+              //      error.response.data.message) ||
+              //    error.message ||
+              //    error.toString()
+              //});
+      
+              //if (error.response && error.response.status === 401) {
+              //  EventBus.dispatch("logout");
+              //}
+            }
+        );
       }
 
     return (
@@ -28,10 +51,10 @@ const Login = () => {
 
                 <div>
                     <label htmlFor="email" className="block text-900 font-medium mb-2">Email</label>
-                    <InputText id="email" type="text" className="w-full mb-3" />
+                    <InputText id="email" type="text" className="w-full mb-3" value={username} onChange={(e) => setUsername(e.target.value)}/>
 
                     <label htmlFor="password" className="block text-900 font-medium mb-2">Password</label>
-                    <InputText id="password" type="password" className="w-full mb-3" />
+                    <InputText id="password" type="password" className="w-full mb-3" value={password} onChange={(e) => setPassword(e.target.value)}/>
 
                     <div className="flex align-items-center justify-content-between mb-6">
                         <div className="flex align-items-center">

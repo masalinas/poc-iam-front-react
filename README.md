@@ -13,6 +13,7 @@ npx create-react-app poc-olive-front-react
 ```shell
 npm install react-transition-group --save
 npm install react-router-dom --save
+npm install axios --save
 npm install primereact --save
 npm install primeicons --save
 npm install primeflex --save
