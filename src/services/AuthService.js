@@ -57,11 +57,12 @@ class AuthService {
         const tokenStr = localStorage.getItem(TOKEN);
 
         let token = null;
-        if (tokenStr)             
+        if (tokenStr) {            
             token = JSON.parse(tokenStr);
             
             return jwt_decode(token.access_token);
-    
+        }
+        
         return null;
     }
 }
