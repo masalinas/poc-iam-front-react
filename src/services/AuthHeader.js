@@ -1,15 +1,15 @@
 export default function AuthHeader() {
     const TOKEN = "poc-token";
 
-    const userStr = localStorage.getItem(TOKEN);
+    const tokenStr = localStorage.getItem(TOKEN);
 
-    let user = null;
-    if (userStr)
-      user = JSON.parse(userStr);
+    let token = null;
+    if (tokenStr)
+        token = JSON.parse(tokenStr);
   
-    if (user && user.accessToken) {
-       return { Authorization: 'Bearer ' + user.accessToken }; // for Spring Boot, Symfoni or DJango back-end
-      //return { 'x-access-token': user.accessToken };       // for Node.js Express back-end
+    if (token && token.access_token) {
+        return { "Authorization": 'Bearer ' + token.access_token };                
+      //return { 'x-access-token': token.access_token };       // for Node.js Express back-end
     } else {
       return {};
     }

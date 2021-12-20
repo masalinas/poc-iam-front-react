@@ -13,10 +13,10 @@ const loading = (
 )
 
 // Landing views
-const Login = React.lazy(() => import('./views/landing/login/Login'))
+const Login = React.lazy(() => import('./views/landing/login/LoginView'))
 
 // App views
-const Products = React.lazy(() => import('./views/products/Products'))
+const Products = React.lazy(() => import('./views/products/ProductsView'))
 
 class App extends Component {
   render() {

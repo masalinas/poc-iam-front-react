@@ -64,7 +64,7 @@ const Login = () => {
                         <a className="font-medium no-underline ml-2 text-blue-500 text-right cursor-pointer" href="#/">Forgot your password?</a>
                     </div>
 
-                    <Button label="Sign In" icon="pi pi-user" className="w-full" onClick={loginClick}/>
+                    <Button label="Sign In" icon="pi pi-sign-in" className="w-full" onClick={loginClick}/>
                 </div>
             </div>
         </div>

@@ -1,15 +1,15 @@
 import axios from "axios";
 import AuthHeader from './AuthHeader';
 
-const API_AUTH_URL = "localhost:8001/";
+const API_AUTH_URL = "http://localhost:8001/";
 
 export class ProductService {
     getProducts() {
         return axios
             .get(API_AUTH_URL + "products", { headers: AuthHeader() })
             .then(response => {
-                if (response.data) {
-                    return JSON.stringify(response.data);
+                if (response.status === 200) {
+                    return response.data.data;
             }
     
             return [];

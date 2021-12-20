@@ -1,15 +1,19 @@
 import React, { Component } from 'react'
+import { withRouter } from "react-router-dom";
+
 import { classNames } from 'primereact/utils';
 
+import { Button } from 'primereact/button';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 
+import AuthService from "../../services/AuthService";
 import { ProductService } from '../../services/ProductService';
 
 class Products extends Component {
     constructor(props) {
-        super(props);
-
+        super(props);        
+    
         this.state = {
             products: []
         };
@@ -20,16 +24,44 @@ class Products extends Component {
     }
 
     componentDidMount() {
-        this.productService.getMockProducts().then(data => this.setState({ products: data }));
+        this.productService.getProducts()
+            .then(data => 
+                this.setState({ products: data }
+            ));
     }
 
     verifiedBodyTemplate(rowData) {
         return <i className={classNames('pi', {'true-icon pi-check-circle': rowData.active, 'false-icon pi-times-circle': !rowData.active})}></i>;
     }
 
+    logoutClick() {                
+        AuthService.logout().then(
+            response => {
+                // navigate to logon view
+                this.props.history.push("/login");
+            },
+            error => {
+              //this.setState({
+              //  content:
+              //    (error.response &&
+              //      error.response.data &&
+              //      error.response.data.message) ||
+              //    error.message ||
+              //    error.toString()
+              //});
+      
+              //if (error.response && error.response.status === 401) {
+              //  EventBus.dispatch("logout");
+              //}
+            }
+        );
+    }
+
     render() {
         return (
             <div>
+                <Button label="Logout" icon="pi pi-sign-out" className="w-full" onClick={(e) => this.logoutClick(e)}/>
+
                 <div className="card">
                     <DataTable value={this.state.products} responsiveLayout="scroll">
                         <Column field="code" header="Code"></Column>
@@ -43,4 +75,5 @@ class Products extends Component {
     }
 }
 
-export default Products;
+//export default Products;
+export default withRouter(Products);

@@ -19,22 +19,46 @@ class AuthService {
         });
     }
 
-    logout(refreshToken) {
+    logout() {
         return axios
-            .post(API_AUTH_URL + "logout", refreshToken)
+            .post(API_AUTH_URL + "logout", this.getCurrentRefreshToken())
             .then(response => {
                 localStorage.removeItem(TOKEN);
             });           
     }
 
-    getCurrentUser() {
-        const userStr = localStorage.getItem(TOKEN);
+    getCurrentRefreshToken() {
+        const tokenStr = localStorage.getItem(TOKEN);
 
-        if (userStr) 
-            return JSON.parse(userStr);
+        let token = null;
+        if (tokenStr) {
+            token = JSON.parse(tokenStr);
+            return token.refresh_token
+        }
+
+        return null;
+    }
+
+    getCurrentAccessToken() {
+        const tokenStr = localStorage.getItem(TOKEN);
+
+        let token = null;
+        if (tokenStr) {
+            token = JSON.parse(tokenStr);
+            return token.access_token
+        }
+
+        return null;
+    }
+
+    getCurrentUser() {
+        const tokenStr = localStorage.getItem(TOKEN);
+
+        if (tokenStr) 
+            return JSON.parse(tokenStr);
     
         return null;
-      }
+    }
 }
 
 export default new AuthService();
