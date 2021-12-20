@@ -1,4 +1,5 @@
 import axios from "axios";
+import jwt_decode from "jwt-decode";
 
 const TOKEN = "poc-token";
 const API_AUTH_URL = "http://localhost:8081/iam/poc/";
@@ -27,18 +28,6 @@ class AuthService {
             });           
     }
 
-    getCurrentRefreshToken() {
-        const tokenStr = localStorage.getItem(TOKEN);
-
-        let token = null;
-        if (tokenStr) {
-            token = JSON.parse(tokenStr);
-            return token.refresh_token
-        }
-
-        return null;
-    }
-
     getCurrentAccessToken() {
         const tokenStr = localStorage.getItem(TOKEN);
 
@@ -51,11 +40,27 @@ class AuthService {
         return null;
     }
 
+    getCurrentRefreshToken() {
+        const tokenStr = localStorage.getItem(TOKEN);
+
+        let token = null;
+        if (tokenStr) {
+            token = JSON.parse(tokenStr);
+
+            return token.refresh_token
+        }
+
+        return null;
+    }
+
     getCurrentUser() {
         const tokenStr = localStorage.getItem(TOKEN);
 
-        if (tokenStr) 
-            return JSON.parse(tokenStr);
+        let token = null;
+        if (tokenStr)             
+            token = JSON.parse(tokenStr);
+            
+            return jwt_decode(token.access_token);
     
         return null;
     }

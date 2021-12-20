@@ -17,6 +17,7 @@ npm install axios --save
 npm install primereact --save
 npm install primeicons --save
 npm install primeflex --save
+npm install jwt-decode --save
 ```
 
 ## Start project

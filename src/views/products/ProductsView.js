@@ -53,6 +53,8 @@ class Products extends Component {
               //if (error.response && error.response.status === 401) {
               //  EventBus.dispatch("logout");
               //}
+
+              this.props.history.push("/login");
             }
         );
     }
