@@ -61,10 +61,10 @@ class Products extends Component {
 
     render() {
         return (
-            <div>
-                <Button label="Logout" icon="pi pi-sign-out" className="w-full" onClick={(e) => this.logoutClick(e)}/>
-
+            <div>                
                 <div className="card">
+                    <Button label="Sign Out" icon="pi pi-sign-out" className="w-full" onClick={(e) => this.logoutClick(e)}/>                  
+
                     <DataTable value={this.state.products} responsiveLayout="scroll">
                         <Column field="code" header="Code"></Column>
                         <Column field="description" header="Description"></Column>
