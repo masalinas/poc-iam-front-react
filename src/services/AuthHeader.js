@@ -9,7 +9,7 @@ export default function AuthHeader() {
   
     if (token && token.access_token) {
         return { "Authorization": 'Bearer ' + token.access_token };                
-      //return { 'x-access-token': token.access_token };       // for Node.js Express back-end
+      //return { 'x-access-token': token.access_token };  // for Node.js Express back-end
     } else {
       return {};
     }
