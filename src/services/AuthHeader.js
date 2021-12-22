@@ -1,4 +1,4 @@
-export default function AuthHeader() {
+const AuthHeader = () => {
     const TOKEN = "poc-token";
 
     const tokenStr = localStorage.getItem(TOKEN);
@@ -14,3 +14,5 @@ export default function AuthHeader() {
       return {};
     }
   }
+
+  export default AuthHeader;

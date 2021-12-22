@@ -20,6 +20,22 @@ class AuthService {
         });
     }
 
+    refresh() {
+        const refreshToken = this.getCurrentRefreshToken();
+
+        return axios
+            .post(API_AUTH_URL + "refresh", {
+                refreshToken
+            })
+            .then(response => {
+                if (response.data.access_token) {
+                    localStorage.setItem(TOKEN, JSON.stringify(response.data));
+            }
+
+            return response.data;
+        });
+    }
+
     logout() {
         return axios
             .post(API_AUTH_URL + "logout", this.getCurrentRefreshToken())

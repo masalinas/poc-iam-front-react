@@ -8,6 +8,8 @@ import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
 import 'primeflex/primeflex.css';
 
+import GuardedRoute from './components/GuardedRoute';
+
 const loading = (
   <div>Loading...</div>
 )
@@ -24,8 +26,8 @@ class App extends Component {
       <Router>
         <Suspense fallback={loading}>
           <Switch>
-            <Route exact path="/login" name="Login Page" render={(props) => <Login {...props} />} />          
-            <Route path="/" name="Products" render={(props) => <Products {...props} />} />
+            <Route exact path="/login" name="Login Page" render={(props) => <Login {...props} />} />            
+            <GuardedRoute path="/" name="Products" component={Products} />
           </Switch>
         </Suspense>
       </Router>
