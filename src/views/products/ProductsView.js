@@ -41,20 +41,9 @@ class Products extends Component {
                 this.props.history.push("/login");
             },
             error => {
-              //this.setState({
-              //  content:
-              //    (error.response &&
-              //      error.response.data &&
-              //      error.response.data.message) ||
-              //    error.message ||
-              //    error.toString()
-              //});
-      
-              //if (error.response && error.response.status === 401) {
-              //  EventBus.dispatch("logout");
-              //}
+                console.log(error);
 
-              this.props.history.push("/login");
+                this.props.history.push("/login");
             }
         );
     }

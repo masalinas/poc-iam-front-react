@@ -3,45 +3,53 @@ import jwt_decode from "jwt-decode";
 
 const TOKEN = "poc-token";
 const API_AUTH_URL = "http://localhost:8081/iam/poc/";
+//const API_AUTH_URL = "http://poc-olive-security:8081/iam/poc/";
 
 class AuthService {
     login(username, password) {
         return axios
-            .post(API_AUTH_URL + "login", {
-                username,
-                password
-            })
+            .post(API_AUTH_URL + "login", { username, password })
             .then(response => {
                 if (response.data.access_token) {
                     localStorage.setItem(TOKEN, JSON.stringify(response.data));
-            }
+                }
     
-            return response.data;
-        });
+                return response.data;
+            })
+            .catch(error => {
+                console.log(error);
+            });
     }
 
     refresh() {
         const refreshToken = this.getCurrentRefreshToken();
 
         return axios
-            .post(API_AUTH_URL + "refresh", {
-                refreshToken
-            })
+            .post(API_AUTH_URL + "refresh", { refreshToken })
             .then(response => {
                 if (response.data.access_token) {
                     localStorage.setItem(TOKEN, JSON.stringify(response.data));
-            }
+                }
 
-            return response.data;
-        });
+                return response.data;
+            })
+            .catch(error => {
+                console.log(error);
+            });
     }
 
     logout() {
+        const refreshToken = this.getCurrentRefreshToken();
+
         return axios
-            .post(API_AUTH_URL + "logout", this.getCurrentRefreshToken())
+            .post(API_AUTH_URL + "logout", refreshToken)
             .then(response => {
                 localStorage.removeItem(TOKEN);
-            });           
+
+                return response;
+            }).catch(error => {
+                console.log(error);
+            });         
     }
 
     getCurrentAccessToken() {
